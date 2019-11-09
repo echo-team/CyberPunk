@@ -3,9 +3,10 @@ Small web tool to track, display and predict cyber attacks rate from supplier we
 
 
 ## Table of contents
-- [Terminology](terms)
-- [Contributing](contrib)
-- [Furthure reading](furthure)
+- [Terminology](#terms)
+- [Dev environment](#dev)
+- [Contributing](#contrib)
+- [Furthure reading](#furthure)
 
 
 ## <a name="terms"></a> Terminology
@@ -13,10 +14,22 @@ Small web tool to track, display and predict cyber attacks rate from supplier we
 `client files` - files being sent to client (`html`, `js`, `css`, etc.).  
 
 
+## <a name="dev"></a> Dev environment
+
+### Dependances
+- git version with hooks support (pre-commit, pre-push)
+- bash (on widows Cygwin is useful)
+- make
+
+### Installation
+Enter the local repo foder and type `make install` in terminal. This will do following:
+- install hooks
+
+
 ## <a name="contrib"></a> Contributing
 
 ### Commiting
-Commit name starts with upper case letter, ends with issue index. It should contain briethly description of what was done in commit.  
+Commit name starts with upper case letter, ends with issue index. It should contain briethly description of what was done in commit. Notice, that you will not be able to merge into master if commit messages style will not match this rules.  
 Example: `Contributing rules in README.md (issue #1).`.  
 To update your branch with current `master` use `git rebase remote_name/master` or `git pull --rebase remote_name master`. To publish your commits after update use `git push remote_name +HEAD`.
 
@@ -24,7 +37,7 @@ To update your branch with current `master` use `git rebase remote_name/master` 
 Name should be same with issue name. In body should be reference to issue and copied task description (last is optional). You pull-request will be reviewed by project member after all CI tasks passed successfully.
 
 ### Branches
-Branch name should contain your nickname, issue number and one-word description (last is optional), divided as in expression: `nickname.issue-description.issue-number`. If you want more than one word - use `-` as a word divider.  
+Branch name should contain your nickname, issue number and one-word description (last is optional), divided as in expression: `nickname.issue-description.issue-id`. If you want more than one word - use `-` as a word divider. Notice, that you will not be able to merge into master if branch name style will not match this rules.  
 Example: `gigafiga21.frontend.13`
 
 

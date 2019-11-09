@@ -1,0 +1,15 @@
+#!/bin/sh
+
+# Getting commit message
+MESSAGE=`cat $1`;
+
+# Checking commit syntax 
+TEST=`echo "$MESSAGE" | sed -n '/^[A-Z].* (issue #[0-9]*)\.$/p'`;
+
+if [[ $TEST == "" ]]; then
+    printf "error: invalid commit syntax."
+    printf "\n\n  Valid syntax is \"Commit message (issue #[issue id]).\" \n\n"
+    exit 1;
+fi
+
+exit 0;
