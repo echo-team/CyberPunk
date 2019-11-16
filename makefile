@@ -1,2 +1,2 @@
 install:
-	cp ./Infra/Hooks/ ./.git/hooks/
+	cp ./Infra/Hooks/* ./.git/hooks/
