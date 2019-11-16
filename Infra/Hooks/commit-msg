@@ -1,15 +1,19 @@
 #!/bin/sh
 
+FOLDER=`git rev-parse --show-toplevel`
+. $FOLDER/Infra/GitSyntax/Commits.sh --source-only
+printf "log: checking..."
+
 # Getting commit message
 MESSAGE=`cat $1`;
 
 # Checking commit syntax 
-TEST=`echo "$MESSAGE" | sed -n '/^[A-Z].* (issue #[0-9]*)\.$/p'`;
+checkCommitStyle $MESSAGE;
+ERROR=$?;
 
-if [[ $TEST == "" ]]; then
-    printf "error: invalid commit syntax."
-    printf "\n\n  Valid syntax is \"Commit message (issue #[issue id]).\" \n\n"
+if [[ $ERROR -ne 0 ]]; then
     exit 1;
 fi
 
+printf "\n";
 exit 0;

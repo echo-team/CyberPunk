@@ -1,0 +1,4 @@
+language: bash
+script:
+  - bash ./Infra/GitSyntax/Commits.sh
+  - bash ./Infra/GitSyntax/Branch.sh
