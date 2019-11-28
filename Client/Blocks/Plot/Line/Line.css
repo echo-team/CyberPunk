@@ -1,0 +1,7 @@
+.plot__line
+{
+    fill-opacity: 0;
+    stroke: #fff;
+    stroke-width: 2;
+    stroke-linecap: round;
+}
