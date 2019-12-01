@@ -1,12 +1,29 @@
 const path = require('path');
 const CopyPlugin = require('copy-webpack-plugin');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 /**
- * Name of block to build
+ * Name of block or page to build
  * @type {String}
  */
-var block;
+var target;
+
+/**
+ * Building type `Page` or `Block`
+ * @type {String}
+ */
+var type;
+
+/**
+ * Path to input file for building
+ * @type {String}
+ */
+var entry;
+
+/**
+ * Output file name
+ * @type {String}
+ */
+var output;
 
 /**
  * Current environment
@@ -32,7 +49,17 @@ process.argv.forEach((argv) =>
     switch(argv[0])
     {
         case '--block':
-            block = argv[1];
+            target = argv[1];
+            output = 'Example';
+            entry = target + '/.Example/Example'
+            type = 'Block';
+            break;
+        
+        case '--page':
+            target = argv[1];
+            output = target;
+            entry = target + `/${argv[1]}`;
+            type = 'Page';
             break;
         
         case '--env':
@@ -43,11 +70,11 @@ process.argv.forEach((argv) =>
 
 module.exports =
 {
-    entry: `./Blocks/${block}/.Example/Example.js`,
+    entry: `./${type}s/${entry}.js`,
     output: 
     {
-        filename: 'Example.js',
-        path: path.resolve(__dirname, `../Build/${env}/${block}`),
+        filename: `${output}.js`,
+        path: path.resolve(__dirname, `../Build/${env}/${type}s/${target}`)
     },
     module:
     {
@@ -60,8 +87,8 @@ module.exports =
     plugins:
     [
         new CopyPlugin([
-            { from: `./Blocks/${block}/.Example/Example.html`, to: 'Example.html' },
+            { from: `${type}s/${entry}.html`, to: `${output}.html` },
         ]),
     ],
-    mode: 'development',
+    mode: 'development'
 };
