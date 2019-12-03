@@ -1,0 +1,22 @@
+{
+  "name": "cyberpunk",
+  "version": "0.0.1",
+  "description": "Small web tool to track, display and predict cyber attacks rate from supplier website.",
+  "main": "test.js",
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/echo-team/CyberPunk.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/echo-team/CyberPunk/issues"
+  },
+  "homepage": "https://github.com/echo-team/CyberPunk#readme",
+  "devDependencies": {
+    "eslint": "^6.7.2"
+  }
+}
