@@ -1,5 +1,9 @@
 import './Example.css';
 import Statistics from '../Statistics';
+import withBlockValue from '../withBlockValue/Statistics';
+import compose from 'compose';
+
+const StatisticsChildren = compose(Statistics, withBlockValue);
 
 var statistics = new Statistics(
     document.getElementById('statistics'),
@@ -10,3 +14,16 @@ var statistics = new Statistics(
         ]
     }
 );
+
+var innerBlock = document.createElement('span'),
+    statisticsChildren = new StatisticsChildren(
+    document.getElementById('statistics'),
+    {
+        variables: [
+            { name: 'With inner block:' },
+        ]
+    }
+);
+
+innerBlock.textContent = 'Hoooray!';
+statisticsChildren.update('With inner block:', innerBlock);

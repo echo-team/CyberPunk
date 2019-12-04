@@ -51,7 +51,18 @@ function Statistics(parent, params)
         variable.appendChild(value);
 
         DOM.container.appendChild(variable);
-        DOM.variables[name] = [variable, value];
+        DOM.variables[name] = [header, value];
+    }
+
+    /**
+     * Sets/updates value of given variable
+     * @param {Object} DOM   - DOM tree of the class
+     * @param {String} name  - variable name
+     * @param {String} value - new value
+     */
+    this.setValue = function(DOM, name, value)
+    {
+        DOM.variables[name][1].textContent = value;
     }
     
     /**
@@ -66,7 +77,7 @@ function Statistics(parent, params)
             createVariable(name);
         }
 
-        DOM.variables[name][1].textContent = value;
+        this.setValue(DOM, name, value);
     }
 
     DOM.container = document.createElement('div');
@@ -77,8 +88,8 @@ function Statistics(parent, params)
     {
         params.variables.forEach((variable) =>
         {
-            createVariable(variable.name);
-            DOM.variables[variable.name][1].textContent = variable.value;
+            variable.name ? createVariable(variable.name) : null;
+            variable.value ? this.setValue(DOM, variable.name, variable.value) : null;
         })
     }
 }
