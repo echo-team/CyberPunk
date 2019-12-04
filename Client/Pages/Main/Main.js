@@ -1,11 +1,14 @@
 import './Main.css';
-
-import Base from '../../Blocks/Plot/Plot';
-import withTimeMarkers from '../../Blocks/Plot/withTimeMarkers/Plot';
 import compose from 'compose';
-import Statistics from '../../Blocks/Statistics/Statistics';
 
-const Plot = compose(Base, withTimeMarkers);
+import PlotBase from '../../Blocks/Plot/Plot';
+import PlotTimeMarkers from '../../Blocks/Plot/withTimeMarkers/Plot';
+import PlotThemeHack from '../../Blocks/Plot/withTheme/Hack/Plot'
+const Plot = compose(PlotBase, PlotTimeMarkers, PlotThemeHack);
+
+import StatisticsBase from '../../Blocks/Statistics/Statistics';
+import StatisticsThemeHack from '../../Blocks/Statistics/withTheme/Hack/Statistics'
+const Statistics = compose(StatisticsBase, StatisticsThemeHack);
 
 /**
  * Runs when new value received

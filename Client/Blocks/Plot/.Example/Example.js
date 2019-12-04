@@ -1,9 +1,10 @@
 import './Example.css';
 import Base from '../Plot.js';
-import withTimeMarkers from '../withTimeMarkers/Plot.js';
+import withTimeMarkers from '../withTimeMarkers/Plot';
+import withThemeHack from '../withTheme/Hack/Plot';
 import compose from 'compose';
 
-const Plot = compose(Base, withTimeMarkers);
+const Plot = compose(Base, withTimeMarkers, withThemeHack);
 
 var plot = new Plot(document.getElementById('plot'), {
     width: 600, height: 300,
