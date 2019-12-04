@@ -1,0 +1,9 @@
+#!/bin/sh
+
+FOLDER=`git rev-parse --show-toplevel`
+. $FOLDER/Infra/Linters/Linting.sh --source-only
+
+# Getting file names with changes
+FILE_LIST=$(git diff --diff-filter=d --cached --name-only);
+
+linting "$FILE_LIST";
