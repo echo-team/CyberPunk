@@ -1,0 +1,18 @@
+.plot__text-marker
+{
+    fill: #fff;
+    text-anchor: start;
+    font-family: sans-serif;
+}
+.plot__text-marker-y
+{
+    text-anchor: end;
+}
+
+.plot__stroke-marker
+{
+    fill-opacity: 0;
+    stroke: #fff;
+    stroke-width: 2;
+    stroke-linecap: round;
+}

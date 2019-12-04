@@ -35,7 +35,7 @@ module.exports = {
         "dot-notation": 2,
         "eol-last": [2, "always"],
         "func-call-spacing": [2, "never"],
-        "indent": [2, 4],
+        "indent": [2, 4, { "SwitchCase": 1 }],
         "key-spacing": [2, { "beforeColon": false }],
         "lines-around-comment": [2, { "beforeBlockComment": true, "allowBlockStart": true }],
         "lines-between-class-members": [2, "always"],

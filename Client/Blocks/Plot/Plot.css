@@ -1,0 +1,28 @@
+.plot__container
+{
+    display: flex;
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.plot__scroller
+{
+    position: absolute;
+    right: 0%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.plot__line-canvas
+{
+    width: 100%;
+    height: 100%;
+    float: right;
+}
+
+.plot__axes-canvas
+{
+    width: 100%;
+    height: 100%;
+}
