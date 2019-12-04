@@ -26,7 +26,7 @@ process.argv.forEach((argv) =>
 
     if (argv.length != 2)
     {
-        // console.log(`error: unsupported argument "${argv[0]}"`);
+        console.log(`error: unsupported argument "${argv[0]}"`);
     }
 
     switch(argv[0])
@@ -46,21 +46,21 @@ module.exports =
     entry: `./Blocks/${block}/.Example/Example.js`,
     output: 
     {
-        filename: `Example.js`,
-        path: path.resolve(__dirname, `../Build/${env}/${block}`)
+        filename: 'Example.js',
+        path: path.resolve(__dirname, `../Build/${env}/${block}`),
     },
     module:
     {
         rules:
         [
-            { test: /\.css$/, use: ['style-loader', 'css-loader'] }
-        ]
+            { test: /\.css$/, use: ['style-loader', 'css-loader'] },
+        ],
     },
     plugins:
     [
         new CopyPlugin([
-            { from: `./Blocks/${block}/.Example/Example.html`, to: `Example.html` },
+            { from: `./Blocks/${block}/.Example/Example.html`, to: 'Example.html' },
         ]),
     ],
-    mode: 'production'
+    mode: 'production',
 };
