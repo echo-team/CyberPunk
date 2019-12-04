@@ -26,7 +26,7 @@ process.argv.forEach((argv) =>
 
     if (argv.length != 2)
     {
-        console.log(`error: unsupported argument "${argv[0]}"`);
+        return;
     }
 
     switch(argv[0])
@@ -62,5 +62,5 @@ module.exports =
             { from: `./Blocks/${block}/.Example/Example.html`, to: 'Example.html' },
         ]),
     ],
-    mode: 'production',
+    mode: 'development',
 };
