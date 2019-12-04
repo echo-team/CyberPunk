@@ -1,10 +1,11 @@
 const { ipcRenderer } = require('electron');
 
 /**
- * Event of changing value
+ * Event of time interval for value derivative passed  
+ * Sends new value appeared by this interval
  * @param {Element} target - element with value as a child
  */
-function onChange(target)
+function onTime(target)
 {
     ipcRenderer.send('value', target.textContent);
 }
@@ -12,6 +13,7 @@ function onChange(target)
 /**
  * Wait for element with value appear on the page  
  * Checking element appearance 100 times with 1s timeout
+ * @return {Promise}
  */
 function waitForTarget()
 {
@@ -41,20 +43,32 @@ function waitForTarget()
 }
 
 /**
+ * Runs callback every 5sec, syncronyzed with day time
+ * @param  {Function} callback
+ * @return {Promise}
+ */
+function waitForTime(callback)
+{
+    var time = 5000 - Date.now() % 5000;
+    setTimeout(() =>
+    {
+        callback();
+        waitForTime(callback);
+    }, time);
+}
+
+/**
  * Runs when process loaded
  */
 process.once('loaded', () =>
 {
     window.onload = () =>
     {
-        console.log('loaded');
         waitForTarget()
-            .then((target) => 
+            .then((target) =>
             {
-                onChange = onChange.bind(null, target);
-
-                var observer = new MutationObserver(onChange);
-                observer.observe(target, { childList: true });
-            });
+                onTime = onTime.bind(null, target);
+                waitForTime(onTime);
+            })
     };
 });
