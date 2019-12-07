@@ -1,0 +1,81 @@
+.digital-number__digit-container
+{
+    display: inline-block;
+    height: 1em;
+    margin-right: 10px;
+}
+
+.digital-number__digit
+{
+    height: 100%;
+}
+
+.digital-number__digit path:not([style])
+{
+    fill: none;
+    stroke: #fff;
+    stroke-width: 1.5875;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-opacity: .3137;
+}
+
+.digital-number__digit-0 path:nth-child(2), .digital-number__digit-0 path:nth-child(3), .digital-number__digit-0 path:nth-child(5), .digital-number__digit-0 path:nth-child(6), .digital-number__digit-0 path:nth-child(8), .digital-number__digit-0 path:nth-child(9)
+{
+    stroke: #19b80b;
+    stroke-opacity: 1;
+}
+
+.digital-number__digit-1 path:nth-child(3), .digital-number__digit-1 path:nth-child(9)
+{
+    stroke: #19b80b;
+    stroke-opacity: 1;
+}
+
+.digital-number__digit-2 path:nth-child(1), .digital-number__digit-2 path:nth-child(2), .digital-number__digit-2 path:nth-child(3), .digital-number__digit-2 path:nth-child(6), .digital-number__digit-2 path:nth-child(8)
+{
+    stroke: #19b80b;
+    stroke-opacity: 1;
+}
+
+.digital-number__digit-3 path:nth-child(1), .digital-number__digit-3 path:nth-child(2), .digital-number__digit-3 path:nth-child(3), .digital-number__digit-3 path:nth-child(6), .digital-number__digit-3 path:nth-child(9)
+{
+    stroke: #19b80b;
+    stroke-opacity: 1;
+}
+
+.digital-number__digit-4 path:nth-child(1), .digital-number__digit-4 path:nth-child(3), .digital-number__digit-4 path:nth-child(5), .digital-number__digit-4 path:nth-child(9)
+{
+    stroke: #19b80b;
+    stroke-opacity: 1;
+}
+
+.digital-number__digit-5 path:nth-child(1), .digital-number__digit-5 path:nth-child(2), .digital-number__digit-5 path:nth-child(5), .digital-number__digit-5 path:nth-child(6), .digital-number__digit-5 path:nth-child(9)
+{
+    stroke: #19b80b;
+    stroke-opacity: 1;
+}
+
+.digital-number__digit-6 path:nth-child(1), .digital-number__digit-6 path:nth-child(2), .digital-number__digit-6 path:nth-child(5), .digital-number__digit-6 path:nth-child(6), .digital-number__digit-6 path:nth-child(8), .digital-number__digit-6 path:nth-child(9)
+{
+    stroke: #19b80b;
+    stroke-opacity: 1;
+}
+
+.digital-number__digit-7 path:nth-child(2), .digital-number__digit-7 path:nth-child(3), .digital-number__digit-7 path:nth-child(9)
+{
+    stroke: #19b80b;
+    stroke-opacity: 1;
+}
+
+.digital-number__digit-8 path:nth-child(1), .digital-number__digit-8 path:nth-child(2), .digital-number__digit-8 path:nth-child(3), .digital-number__digit-8 path:nth-child(5), .digital-number__digit-8 path:nth-child(6), .digital-number__digit-8 path:nth-child(8), .digital-number__digit-8 path:nth-child(9)
+{
+    stroke: #19b80b;
+    stroke-opacity: 1;
+}
+
+.digital-number__digit-9 path:nth-child(1), .digital-number__digit-9 path:nth-child(2), .digital-number__digit-9 path:nth-child(3), .digital-number__digit-9 path:nth-child(5), .digital-number__digit-9 path:nth-child(6), .digital-number__digit-9 path:nth-child(9)
+{
+    stroke: #19b80b;
+    stroke-opacity: 1;
+}

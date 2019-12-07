@@ -1,10 +1,10 @@
-import svg from './Assets/DigitalNumber.svg';
-import './DigitalNumber.css'
+import Digit from './Digit/Digit';
 
 /**
- * Digital number (as like as one at the digital clock)
+ * Displays number just like at digital clocks
  * @param {Element} parent - where to place block
  * @param {Object}  params - block settings
+ * @param {Number}  params.category - min number of digits
  * @param {Number}  params.number - number to display
  */
 function DigitalNumber(parent, params)
@@ -16,7 +16,7 @@ function DigitalNumber(parent, params)
     var DOM =
         {
             container: null,
-            number: null,
+            digits: [],
         };
     
     /**
@@ -25,47 +25,65 @@ function DigitalNumber(parent, params)
      */
     var CSS =
         {
-            container: 'digital-number__container',
-            number: 'digital-number',
-            numbers: 'digital-number__',
+            container: 'digital-number',
         };
-
+    
     /**
-     * Current displayed number
-     * @type {Undefined|Number}
+     * Minimal amount of digits in number
+     * @type {Number}
      */
-    var currentNumber;
+    var category = params.category || 1;
 
     /**
-     * Displays passed number
-     * @param {Undefined|Number} number
+     * Draws number
+     * @param {Number} number
      */
     this.display = function(number)
     {
-        if (currentNumber !== undefined)
+        number = String(number).split('');
+
+        if (number.length > category && number.length > DOM.digits.length)
         {
-            DOM.number.classList.remove(CSS.current + currentNumber);
+            let additionalDigits = number.length - DOM.digits.length;
+
+            for (let index = 0; index < additionalDigits; index ++)
+            {
+                DOM.digits.push(new Digit(DOM.container));
+            }
+        }
+        else
+        {
+            let diff = category > number.length ? category : number.length,
+                unnesessaryDigits = DOM.digits.length - diff;
+
+            for (let index = 0; index < unnesessaryDigits; index ++)
+            {
+                let destructing = DOM.digits.pop();
+                destructing.destroy();
+            }
+
+            for (let index = 0; index < DOM.digits.length - number.length; index ++)
+            {
+                number.splice(0, 0, undefined);
+            }
         }
 
-        if (number >= 0 && number <= 9)
+        for (let index = 0; index < number.length; index ++)
         {
-            DOM.number.classList.add(CSS.numbers + number);
-            currentNumber = number;
-            return;
+            DOM.digits[DOM.digits.length - 1 - index].display(Number(number[number.length - index - 1]));
         }
-
-        currentNumber = undefined;
     }
 
     DOM.container = document.createElement('div');
     DOM.container.classList.add(CSS.container);
-    DOM.container.innerHTML = svg;
     parent.appendChild(DOM.container);
 
-    DOM.number = DOM.container.children[0];
-    DOM.number.classList.add(CSS.number);
+    for (let index = 0; index < category; index ++)
+    {
+        DOM.digits.push(new Digit(DOM.container));
+    }
 
-    if (params)
+    if (params.number)
     {
         this.display(params.number);
     }
