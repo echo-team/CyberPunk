@@ -54,6 +54,7 @@ module.exports =
         rules:
         [
             { test: /\.css$/, use: ['style-loader', 'css-loader'] },
+            { test: /\.svg$/, use: ['raw-loader'] },
         ],
     },
     plugins:
