@@ -1,14 +1,20 @@
 import DigitalNumber from '../DigitalNumber';
 import './Example.css';
 
-var container = document.querySelector('.digital-number-container');
-new DigitalNumber(container, { number: 0 });
-new DigitalNumber(container, { number: 1 });
-new DigitalNumber(container, { number: 2 });
-new DigitalNumber(container, { number: 3 });
-new DigitalNumber(container, { number: 4 });
-new DigitalNumber(container, { number: 5 });
-new DigitalNumber(container, { number: 6 });
-new DigitalNumber(container, { number: 7 });
-new DigitalNumber(container, { number: 8 });
-new DigitalNumber(container, { number: 9 });
+var number = new DigitalNumber(document.querySelector('.digital-number-container'),
+    { category: 4, number: 1234567890 },
+);
+
+var numbers = [1111, 222, 33, 1234567890, 999999],
+    current = 0;
+
+var stop = setInterval(() =>
+{
+    number.display(numbers[current]);
+    current ++;
+
+    if (current >= numbers.length)
+    {
+        clearInterval(stop);
+    }
+}, 2000);
