@@ -1,0 +1,9 @@
+.plot__text-marker
+{
+    fill: #19b80b;
+}
+
+.plot__stroke-marker
+{
+    stroke-opacity: 0.5;
+}

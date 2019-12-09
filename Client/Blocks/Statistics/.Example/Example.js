@@ -1,9 +1,10 @@
 import './Example.css';
 import Statistics from '../Statistics';
 import withBlockValue from '../withBlockValue/Statistics';
+import withThemeHack from '../withTheme/Hack/Statistics';
 import compose from 'compose';
 
-const StatisticsChildren = compose(Statistics, withBlockValue);
+const StatisticsChildren = compose(Statistics, withBlockValue, withThemeHack);
 
 var statistics = new Statistics(
     document.getElementById('statistics'),
@@ -17,7 +18,7 @@ var statistics = new Statistics(
 
 var innerBlock = document.createElement('span'),
     statisticsChildren = new StatisticsChildren(
-    document.getElementById('statistics'),
+    document.getElementById('with-block-value'),
     {
         variables: [
             { name: 'With inner block:' },
