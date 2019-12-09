@@ -1,6 +1,9 @@
 body
 {
-    background: #4f4f4f;
+    background-color: #4f4f4f;
+    background: url(Assets/Background.png);
+    background-size: cover;
+
 }
 
 .page__content-container
@@ -12,14 +15,38 @@ body
     height: 100%;
 }
 
+.page__logo
+{
+    height: 52px;
+    margin: 0 0 80px 40px;
+}
+
 .page__content
 {
     display: flex;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+}
+
+.page__statistics
+{
+    margin: 0 40px;
+}
+
+.statistics__header
+{
+    margin-right: 10px;
+    color: #fff;
+}
+
+.statistics__value
+{
+    min-width: 140px;
 }
 
 .page__plot
 {
     width: 600;
     height: 400;
-    margin-right: 40px;
+    margin: 0px 40px 0 40px;
 }

@@ -1,4 +1,3 @@
-import './Main.css';
 import compose from 'compose';
 
 import PlotBase from '../../Blocks/Plot/Plot';
@@ -7,8 +6,13 @@ import PlotThemeHack from '../../Blocks/Plot/withTheme/Hack/Plot'
 const Plot = compose(PlotBase, PlotTimeMarkers, PlotThemeHack);
 
 import StatisticsBase from '../../Blocks/Statistics/Statistics';
+import StatisticsBlockValue from '../../Blocks/Statistics/withBlockValue/Statistics';
 import StatisticsThemeHack from '../../Blocks/Statistics/withTheme/Hack/Statistics'
-const Statistics = compose(StatisticsBase, StatisticsThemeHack);
+const Statistics = compose(StatisticsBase, StatisticsBlockValue, StatisticsThemeHack);
+
+import DigitalNumber from '../../Blocks/DigitalNumber/DigitalNumber';
+
+import './Main.css';
 
 /**
  * Runs when new value received
@@ -17,16 +21,25 @@ const Statistics = compose(StatisticsBase, StatisticsThemeHack);
  */
 function onData(value, time)
 {
-    statistics.update('Current:', value);
+    current.display(value);
     plot.pushDots([{ y: value, x: time }]);
 }
 
 var statistics = new Statistics(document.querySelector('.page__statistics'), {
     variables: [
-        { name: 'Current:', value: '0' },
-        { name: 'In 5sec:', value: '0' },
+        { name: 'Current:', value: '' },
+        { name: 'In 5sec:', value: '' },
     ],
 });
+
+var current = new DigitalNumber(
+        document.querySelectorAll('.statistics__value')[0],
+        { category: 4 }
+    ),
+    prediction = new DigitalNumber(
+        document.querySelectorAll('.statistics__value')[1],
+        { category: 4 }
+    );
 
 var plot = new Plot(document.querySelector('.page__plot'), {
     width: 600, height: 400,
