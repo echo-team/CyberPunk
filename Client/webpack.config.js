@@ -74,21 +74,38 @@ module.exports =
     output: 
     {
         filename: `${output}.js`,
-        path: path.resolve(__dirname, `../Build/${env}/${type}s/${target}`)
+        path: path.resolve(__dirname, `../Build/${env}/${type}s/${target}`),
     },
     module:
     {
         rules:
         [
+            {
+                test: /\.js$/,
+                use:
+                {
+                    loader: 'babel-loader',
+                    options:
+                    {
+                        presets: ['@babel/preset-env'],
+                    },
+                },
+            },
             { test: /\.css$/, use: ['style-loader', 'css-loader'] },
             { test: /\.svg$/, use: ['raw-loader'] },
+            {
+                test: /\.(png|jpe?g|gif)$/i,
+                loader: 'file-loader',
+                options: { outputPath: () => `${type}s/${target}/Assets` },
+            },
         ],
     },
     plugins:
     [
         new CopyPlugin([
             { from: `${type}s/${entry}.html`, to: `${output}.html` },
+            { from: `${type}s/${output}/Assets`, to: 'Assets' },
         ]),
     ],
-    mode: 'development'
+    mode: 'development',
 };
