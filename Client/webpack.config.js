@@ -91,12 +91,21 @@ module.exports =
                     },
                 },
             },
-            { test: /\.css$/, use: ['style-loader', 'css-loader'] },
+            { test: /\.css$/, use:
+                [
+                    'style-loader',
+                    'css-loader',
+                ],
+            },
             { test: /\.svg$/, use: ['raw-loader'] },
             {
                 test: /\.(png|jpe?g|gif)$/i,
                 loader: 'file-loader',
-                options: { outputPath: () => `${type}s/${target}/Assets` },
+                options:
+                {
+                    publicPath: 'Assets/',
+                    name: '[name].[ext]',
+                },
             },
         ],
     },
