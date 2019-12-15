@@ -8,13 +8,10 @@
 
 #include "../Common.hpp"
 
-using namespace Poco;
-using namespace Poco::Net;
-
 /**
  * Listen HTTP requests
  */
-class HTTPRouter : public HTTPRequestHandler
+class HTTPRouter : public Poco::Net::HTTPRequestHandler
 {
     public:
 
@@ -23,11 +20,11 @@ class HTTPRouter : public HTTPRequestHandler
          * @param request  - request from client
          * @param responce - responce text sent to client
          */
-        void handleRequest(HTTPServerRequest& request, HTTPServerResponse& response)
+        void handleRequest(Poco::Net::HTTPServerRequest& request, Poco::Net::HTTPServerResponse& response)
         {
-            response.setStatus(HTTPResponse::HTTP_OK);
+            response.setStatus(Poco::Net::HTTPResponse::HTTP_OK);
 
-            std::string path = URI(request.getURI()).getPath();
+            std::string path = Poco::URI(request.getURI()).getPath();
             std::string ext = getExtension(path);
 
             if (path == "/")
@@ -44,7 +41,7 @@ class HTTPRouter : public HTTPRequestHandler
 /**
  * Creates HTTPRouter
  */
-class HTTPRouterFactory : public HTTPRequestHandlerFactory
+class HTTPRouterFactory : public Poco::Net::HTTPRequestHandlerFactory
 {
     public:
 
@@ -52,7 +49,7 @@ class HTTPRouterFactory : public HTTPRequestHandlerFactory
          * Starts request handler
          * @param request - request from client
          */
-        HTTPRequestHandler* createRequestHandler(const HTTPServerRequest&)
+        Poco::Net::HTTPRequestHandler* createRequestHandler(const Poco::Net::HTTPServerRequest&)
         {
             return new HTTPRouter;
         }

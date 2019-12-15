@@ -4,12 +4,17 @@
   "description": "",
   "main": "Tracker.js",
   "scripts": {
+    "build": "webpack",
     "start": "electron ."
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {},
   "dependencies": {
-    "electron": "^7.1.2"
+    "amqplib": "^0.5.5",
+    "copy-webpack-plugin": "^5.0.5",
+    "electron": "^7.1.2",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10"
   }
 }

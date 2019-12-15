@@ -1,3 +1,5 @@
 Build
+Externals/*/*
+!Externals/*/.gitkeep
 node_modules
 .vscode

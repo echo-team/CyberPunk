@@ -1,4 +1,5 @@
 const { app, BrowserWindow, ipcMain } = require('electron');
+const { Connector } = require('./Connector');
 const path = require('path');
 
 /**
@@ -14,7 +15,7 @@ function createWindow ()
         webPreferences:
         {
             nodeIntegration: false,
-            preload: path.join(__dirname, 'Observer.js'),
+            preload: app.getAppPath('exe') + '/Observer.js',
         },
     });
 
@@ -22,12 +23,19 @@ function createWindow ()
 }
 
 /**
+ * Establishing connection with `RabbitMQ`
+ * @type {Connector}
+ */
+const connector = new Connector();
+
+/**
  * Value changed
  * Sends from Observer content script
  */
 ipcMain.on('value', (event, value) =>
 {
-    
+    console.log(value);
+    connector.send(value);
 });
 
 app.on('ready', createWindow);
