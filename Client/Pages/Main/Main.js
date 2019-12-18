@@ -50,6 +50,13 @@ var plot = new Plot(document.querySelector('.page__plot'), {
 });
 
 /**
+ * Current timezone
+ * Used for extending time sent from server
+ * @type {Number}
+ */
+var timezone = -60 * (new Date()).getTimezoneOffset();
+
+/**
  * Previous received value to calculate delta with next
  * @type {Number|Null}
  */
@@ -90,7 +97,7 @@ connection.onmessage = function(event)
         var value = data[1] - previousValue;
 
         current.display(value);
-        plot.pushDots([{ x: data[0], y: value }]);
+        plot.pushDots([{ x: data[0] + timezone, y: value }]);
     }
 
     previousValue = data[1];
