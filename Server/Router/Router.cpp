@@ -2,7 +2,7 @@
 #include <PoCo/Net/HTTPServer.h>
 #include <Poco/Net/HTTPServerParams.h>
 
-#include "./HTTP.hpp"
+#include "./Server.hpp"
 #include "./Connector.hpp"
 
 /**
@@ -11,9 +11,8 @@
  */
 int main()
 {
-    Poco::Net::HTTPServer http(new HTTPRouterFactory, Poco::Net::ServerSocket(8000), new Poco::Net::HTTPServerParams);
-    http.start();
-
+    Server server(8000);
+    server.start();
     
     ConnectionHandler handler("localhost", 5672);
     AMQP::Connection connection(&handler, AMQP::Login("guest", "guest"), "/");
@@ -21,24 +20,28 @@ int main()
 
     channel.declareQueue("value");
     channel.consume("value", AMQP::noack).onReceived(
-        [](const AMQP::Message &message, uint64_t deliveryTag, bool redelivered)
+        [&](const AMQP::Message &message, uint64_t deliveryTag, bool redelivered)
         {
-            char* data = new char[message.bodySize() + 1];
-            for (int i = 0; i < message.bodySize(); i ++)
+            int size = message.bodySize();
+            char* data = new char[size + 1];
+
+            for (int i = 0; i < size; i ++)
             {
                 data[i] = message.body()[i];
             }
 
-            data[message.bodySize()] = '\0';
+            data[size] = '\0';
+            server.broadcastOnWS(data, size);
 
             std::cout << data << std::endl;
         });
+    std::cout << "Set consumer" << std::endl;
 
     while (1)
     {
         handler.process();
     }
 
-    http.stop();
+    server.stop();
     return 0;
 }

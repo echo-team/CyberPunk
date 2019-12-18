@@ -44,22 +44,64 @@ var current = new DigitalNumber(
 var plot = new Plot(document.querySelector('.page__plot'), {
     width: 600, height: 400,
     maxDotsAmount: 16,
-    legendPaddings: { x: 25, y: 50 },
+    legendPaddings: { x: 50, y: 50 },
     secondsOffset: true, measures: 3,
-    xScale: 8,
+    xScale: 8, yScale: 0.25,
 });
 
 /**
- * This part is server-query WebSockets emulation
- * Remove then create one
+ * Previous received value to calculate delta with next
+ * @type {Number|Null}
  */
-var time = 48255;
+var previousValue = null;
 
-function generateValue()
+/**
+ * Connecting to server via WebSocket to receive value
+ * @type {WebSocket}
+ */
+var connection = new WebSocket('ws://127.0.0.1:8000');
+
+/**
+ * Connection id
+ * Sent from server when connected
+ * @type {String|Null}
+ */
+var id = null;
+
+/**
+ * Getting data from server
+ * @param {Event} event
+ */
+connection.onmessage = function(event)
 {
-    onData(Math.round(Math.random() * 7), time);
-    time += 5;
-    setTimeout(generateValue, 5000);
-}
+    /**
+     * Catching controlling sequance
+     */
+    if (event.data[0] == '$')
+    {
+        id = event.data;
+        return;
+    }
 
-generateValue();
+    var data = event.data.split('.').map((num) => Number(num));
+
+    if (previousValue !== null)
+    {
+        var value = data[1] - previousValue;
+
+        current.display(value);
+        plot.pushDots([{ x: data[0], y: value }]);
+    }
+
+    previousValue = data[1];
+};
+
+/**
+ * Close WebSocket connection
+ * Runs before page closed
+ */
+window.addEventListener('beforeunload', () =>
+{
+    connection.send(id);
+    connection.close(1000);
+});

@@ -4,10 +4,11 @@ const { ipcRenderer } = require('electron');
  * Event of time interval for value derivative passed  
  * Sends new value appeared by this interval
  * @param {Element} target - element with value as a child
+ * @param {Number}  time   - when value was recorded
  */
-function onTime(target)
+function onTime(target, time)
 {
-    ipcRenderer.send('value', target.textContent);
+    ipcRenderer.send('value', String(Math.floor(time / 1000)) + '.' + target.textContent);
 }
 
 /**
@@ -44,15 +45,15 @@ function waitForTarget()
 
 /**
  * Runs callback every 5sec, syncronyzed with day time
- * @param  {Function} callback
- * @return {Promise}
+ * @param {Function} callback
  */
 function waitForTime(callback)
 {
-    var time = 5000 - Date.now() % 5000;
+    var currentTime = Date.now(),
+        time = 5000 - currentTime % 5000;
     setTimeout(() =>
     {
-        callback();
+        callback(currentTime + 5);
         waitForTime(callback);
     }, time);
 }

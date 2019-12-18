@@ -48,7 +48,6 @@ function Markers(xParent, yParent, params)
             var seconds = text.substr(text.length - 3),
                 other = text.substr(1, text.length - 4);
             
-            element.setAttribute('y', element.getAttribute('y') - 13);
             element.textContent = other;
             
             var tSpan = document.createElementNS('http://www.w3.org/2000/svg', 'tspan');

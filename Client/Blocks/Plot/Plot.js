@@ -44,7 +44,7 @@ function Plot(parent, params)
      * Free space to draw numbers arong the plot
      * @type {Object}
      */
-    var legendPaddings = { x: 25, y: 25 } || params.legendPaddings;
+    var legendPaddings = params.legendPaddings || { x: 25, y: 25 };
 
     /**
      * Amount of pixels in one x-step
@@ -107,7 +107,7 @@ function Plot(parent, params)
      */
     this.setMarkers = function(MarkersClass)
     {
-        markers = new MarkersClass(DOM.plotCanvas, DOM.axesCanvas, { legendPaddings, xScale, arrowLength, ...params });
+        markers = new MarkersClass(DOM.plotCanvas, DOM.axesCanvas, { legendPaddings, xScale, yScale, arrowLength, ...params });
     }
 
     DOM.container = document.createElement('div');
