@@ -53,7 +53,7 @@ function waitForTime(callback)
         time = 5000 - currentTime % 5000;
     setTimeout(() =>
     {
-        callback(currentTime + 5);
+        callback(currentTime + 5000);
         waitForTime(callback);
     }, time);
 }
