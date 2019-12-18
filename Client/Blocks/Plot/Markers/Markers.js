@@ -117,7 +117,7 @@ function Markers(xParent, yParent, { legendPaddings, xScale, arrowLength, ...par
             text.classList.add(CSS.textMarker);
             text.setAttribute('font-size', textSize.y);
             text.setAttribute('x', counter * step + pxOffset);
-            text.setAttribute('y', params.height - legendPaddings.x + paddings);
+            text.setAttribute('y', params.height - legendPaddings.y + paddings + textSize.y);
             this.xText(offset.x + pxOffset / xScale + markerScale.x * counter, text);
             DOM.x.appendChild(text);
 
@@ -143,6 +143,8 @@ function Markers(xParent, yParent, { legendPaddings, xScale, arrowLength, ...par
 
         var stroke = document.createElementNS('http://www.w3.org/2000/svg', 'path'),
             path = '';
+
+        markerScale.y = getMarkerScale('y', yScale);
 
         var step = markerScale.y * yScale;
         DOM.y = document.createElementNS('http://www.w3.org/2000/svg', 'g');
